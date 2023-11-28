@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Seus cabeçalhos aqui -->
+</head>
+<body>
+
+<!-- Seu conteúdo HTML aqui -->
+
+<div th:each="dependency : ${listaDependencias}">
+    <!-- Acesse os atributos do objeto DependencyDTO -->
+    <p th:text="${dependency.id}"></p>
+    <!-- Adicione mais campos conforme necessário -->
+
+    <!-- Botão de "Download" -->
+    <a th:href="${dependency.construirLinkMaven()}"
+       download target="_blank">
+        Download
+    </a>
+</div>
+
+<!-- Outro conteúdo HTML, se houver -->
+
+</body>
+</html>
+

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.raferasss.gdep.models.DependencyDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,13 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cadastrarDependencia/busca")
+@RequestMapping("/buscarDependencia")
 public class ControladorJson {
 
 
-    @GetMapping("{dependencia}")
-    public List<DependencyDTO> consultaDependencia(@PathVariable("dependencia") String dependencia) throws IOException {
+
+    @GetMapping("{dep}")
+    public List<DependencyDTO> consultaDependencia(@PathVariable("dep") String dependencia) throws IOException {
         String url = "https://search.maven.org/solrsearch/select?q=a:" + dependencia + "&rows=20&wt=json";
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> resp = restTemplate.getForEntity(url,String.class);
@@ -36,12 +38,12 @@ public class ControladorJson {
         List<DependencyDTO> dependencias = objectMapper.readValue(docs.traverse(),
                 new TypeReference<List<DependencyDTO>>() {});
 
-        for (int i = 0 ;i< dependencias.size();i++)
-            System.out.println(dependencias.get(i).getId());
+
 
 
         return dependencias;
+    }
 
     }
 
-}
+

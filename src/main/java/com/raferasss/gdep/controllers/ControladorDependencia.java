@@ -14,7 +14,7 @@ public class ControladorDependencia {
 
 
     //GERA O FORMULARIO WEB BASEADO NO  CAMINHO form/formDependencia
-    @RequestMapping("/cadastrarDependencia")
+    @RequestMapping(value = "/cadastrarDependencia", method = RequestMethod.GET)
     public String formDependencia () {
 
         return "form/formDependencia";
@@ -23,9 +23,9 @@ public class ControladorDependencia {
     //PROCESSA STRING QUE É DIGITADA PELO USUARIO E NOS LEVA PARA A CHAMADA DO CONTROLADORJSON
     @RequestMapping(value = "/cadastrarDependencia", method = RequestMethod.POST)
     String processarFormulario (@RequestParam("dependencia") String minhaString) throws IOException {
-        System.out.println("String digitada: " + minhaString);
 
-        return "redirect:/cadastrarDependencia/busca/" + minhaString;
+
+             return "redirect:/resultado/" + minhaString;
 
     }
 }

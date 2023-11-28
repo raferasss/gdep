@@ -10,6 +10,7 @@ public class DependencyDTO {
     private String artifact;
     private String latestVersion;
 
+
     // construtores, getters e setters
 
     @JsonProperty("id")
@@ -31,4 +32,16 @@ public class DependencyDTO {
     public String getLatestVersion() {
         return latestVersion;
     }
+
+    public String construirLinkMaven() {
+        // Substituir "." por "/" e ":" por "/"
+        String[] partesId = id.split(":");
+        String path = partesId[0].replace('.', '/') + "/" + partesId[1] + "/" + latestVersion;
+
+        // Concatenar as partes para formar o link completo
+        String link = "https://search.maven.org/remotecontent?filepath=" + path + "/" + partesId[1] + "-" + latestVersion + ".pom";
+
+        return link;
+    }
+
 }
